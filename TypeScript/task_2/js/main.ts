@@ -40,8 +40,27 @@ function createEmployee(salary: number | string): Director | Teacher {
 }
 
 console.log(createEmployee(200));
-Teacher
 console.log(createEmployee(1000));
-Director
 console.log(createEmployee('$500'));
-Director
+
+function isDirector(employee: Teacher | Director): employee is Director {
+  return employee instanceof Director;
+}
+
+function executeWork(employee: Teacher | Director): void {
+  if (isDirector(employee)) {
+    console.log(employee.workDirectorTasks());
+  } else {
+    console.log(employee.workTeacherTasks());
+  }
+}
+
+executeWork(createEmployee(200));
+executeWork(createEmployee(1000));
+
+type Subjects = "Math" | "History";
+function teachClass(todayClass: Subjects): string {
+  return todayClass === "Math" ? "Teaching Math" : "Teaching History";
+}
+console.log(teachClass("Math"));
+console.log(teachClass("History"));
